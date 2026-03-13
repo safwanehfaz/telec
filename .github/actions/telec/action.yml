@@ -1,0 +1,51 @@
+name: "Telegram Approval Upload"
+description: "Ask for Telegram approval, wait for response, then upload a file on yes."
+
+inputs:
+  bot_token:
+    description: "Telegram bot token"
+    required: true
+  chat_id:
+    description: "Telegram chat ID where approval message is sent"
+    required: true
+  file_path:
+    description: "Path to the file to upload if approved"
+    required: true
+  timeout:
+    description: "Approval wait timeout in seconds"
+    required: false
+    default: "15"
+  request_text:
+    description: "Approval request message text"
+    required: false
+    default: "Upload the build artifact?"
+  fail_on_no:
+    description: "Fail action when decision is no/timeout"
+    required: false
+    default: "false"
+
+outputs:
+  decision:
+    description: "Final user decision: yes or no"
+    value: ${{ steps.run.outputs.decision }}
+  status:
+    description: "Final status: uploaded, declined, timed_out, or upload_failed"
+    value: ${{ steps.run.outputs.status }}
+  message_id:
+    description: "Telegram message ID of the approval prompt"
+    value: ${{ steps.run.outputs.message_id }}
+
+runs:
+  using: "composite"
+  steps:
+    - id: run
+      shell: bash
+      env:
+        INPUT_BOT_TOKEN: ${{ inputs.bot_token }}
+        INPUT_CHAT_ID: ${{ inputs.chat_id }}
+        INPUT_FILE_PATH: ${{ inputs.file_path }}
+        INPUT_TIMEOUT: ${{ inputs.timeout }}
+        INPUT_REQUEST_TEXT: ${{ inputs.request_text }}
+        INPUT_FAIL_ON_NO: ${{ inputs.fail_on_no }}
+      run: |
+        "${{ github.action_path }}/script.sh"
