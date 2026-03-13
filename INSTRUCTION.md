@@ -90,7 +90,7 @@ The action produces three outputs:
 ```yaml
 - name: Wait for approval
   id: approve
-  uses: ./.github/actions/telec
+  uses: safwanehfaz/telec@v1
   with:
     bot_token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
     chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -104,7 +104,7 @@ The action produces three outputs:
 ### Case 2: Strict Mode (Fail on No)
 ```yaml
 - name: Ask and proceed
-  uses: ./.github/actions/telec
+  uses: safwanehfaz/telec@v1
   with:
     bot_token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
     chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -115,7 +115,7 @@ The action produces three outputs:
 ### Case 3: Long Timeout (Manual Approval Window)
 ```yaml
 - name: Extended approval window
-  uses: ./.github/actions/telec
+  uses: safwanehfaz/telec@v1
   with:
     bot_token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
     chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}

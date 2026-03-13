@@ -23,7 +23,7 @@ jobs:
 
       - name: Request approval
         id: approval
-        uses: ./.github/actions/telec
+        uses: safwanehfaz/telec@v1
         with:
           bot_token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -61,7 +61,7 @@ jobs:
 
       - name: Ask for production deployment approval
         id: approval
-        uses: ./.github/actions/telec
+        uses: safwanehfaz/telec@v1
         with:
           bot_token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -105,7 +105,7 @@ jobs:
         run: echo "Release notes for v2.0" > notes.md
 
       - name: Require approval (fails if no)
-        uses: ./.github/actions/telec
+        uses: safwanehfaz/telec@v1
         with:
           bot_token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -142,7 +142,7 @@ jobs:
 
       - name: Request manual approval
         id: review
-        uses: ./.github/actions/telec
+        uses: safwanehfaz/telec@v1
         with:
           bot_token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -184,7 +184,7 @@ jobs:
 
       - name: Gate 1: Approve build upload
         id: gate1
-        uses: ./.github/actions/telec
+        uses: safwanehfaz/telec@v1
         with:
           bot_token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -195,7 +195,7 @@ jobs:
       - name: Gate 2: Approve test report upload
         id: gate2
         if: steps.gate1.outputs.decision == 'yes'
-        uses: ./.github/actions/telec
+        uses: safwanehfaz/telec@v1
         with:
           bot_token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -228,7 +228,7 @@ jobs:
         run: echo "quick-build" > app.jar
 
       - name: 10-second approval
-        uses: ./.github/actions/telec
+        uses: safwanehfaz/telec@v1
         with:
           bot_token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -261,7 +261,7 @@ jobs:
         run: tar -czf release.tar.gz *.md LICENSE
 
       - name: Ask approval with context
-        uses: ./.github/actions/telec
+        uses: safwanehfaz/telec@v1
         with:
           bot_token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
